@@ -41,12 +41,12 @@ These assets are provided to perform the tasks described in the [Vault HA Cluste
     The Terraform output will display the IP addresses of the provisioned Vault nodes.
 
     ```plaintext
-    vault_1 (13.56.78.64)  | internal: (10.0.101.21)
+    vault_1 (13.56.78.64)  | internal: (172.31.101.21)
       - Initialized and unsealed.
       - The root token creates a transit key that enables the other Vaults to auto-unseal.
       - Does not join the High-Availability (HA) cluster.
 
-    vault_2 (13.56.255.200) | internal: (10.0.101.22)
+    vault_2 (13.56.255.200) | internal: (172.31.101.22)
       - Initialized and unsealed.
       - The root token and recovery key is stored in /tmp/key.json.
       - K/V-V2 secret engine enabled and secret stored.
@@ -59,13 +59,13 @@ These assets are provided to perform the tasks described in the [Vault HA Cluste
       # Recovery key:
       $ ssh -l ubuntu 13.56.255.200 -i <path/to/key.pem> "cat ~/recovery_key"
 
-    vault_3 (54.183.62.59) | internal: (10.0.101.23)
+    vault_3 (54.183.62.59) | internal: (172.31.101.23)
       - Started
       - You will join it to cluster started by vault_2
 
       $ ssh -l ubuntu 54.183.62.59 -i <path/to/key.pem>
 
-    vault_4 (13.57.235.28) | internal: (10.0.101.24)
+    vault_4 (13.57.235.28) | internal: (172.31.101.24)
       - Started
       - You will join it to cluster started by vault_2
 
@@ -84,7 +84,7 @@ These assets are provided to perform the tasks described in the [Vault HA Cluste
     $ VAULT_TOKEN=$(cat /tmp/key.json | jq -r ".root_token") vault operator raft list-peers
     Node       Address             State     Voter
     ----       -------             -----     -----
-    vault_2    10.0.101.22:8201    leader    true
+    vault_2    172.31.101.22:8201    leader    true
     ```
 
 1.  Open a new terminal, SSH into **vault_3**.
@@ -119,9 +119,9 @@ These assets are provided to perform the tasks described in the [Vault HA Cluste
 
     Node       Address             State       Voter
     ----       -------             -----       -----
-    vault_2    10.0.101.22:8201    leader      true
-    vault_3    10.0.101.23:8201    follower    true
-    vault_4    10.0.101.24:8201    follower    true
+    vault_2    172.31.101.22:8201    leader      true
+    vault_3    172.31.101.23:8201    follower    true
+    vault_4    172.31.101.24:8201    follower    true
     ```
 
     You should see **vault_2**, **vault_3**, and **vault_4** in the cluster.
