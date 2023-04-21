@@ -77,6 +77,8 @@ resource "aws_instance" "vault-server" {
   tags = {
     Name = "${var.environment_name}-vault-server-${var.vault_server_names[count.index]}"
     cluster_name = "raft-test"
+    auto-delete = "no"
+    Owner = "CX"
   }
 
   lifecycle {
