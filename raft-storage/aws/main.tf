@@ -40,6 +40,8 @@ resource "aws_instance" "vault-transit" {
 
   tags = {
     Name = "${var.environment_name}-vault-transit"
+    auto-delete = "no"
+    Owner = "CX"
   }
 
   lifecycle {
